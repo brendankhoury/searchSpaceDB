@@ -60,7 +60,7 @@ def parsesend(data):
     conn = None
     try:
         conn = psycopg2.connect(
-            "sslmode=disable dbname=word-tokens user=postgres hostaddr=35.238.29.180 password=yeNoxLI77EyJahOr")
+            "sslmode=disable dbname=word-tokens user=postgres hostaddr=/cloudsql/hackrpi2021:us-central1:word-tokens password=yeNoxLI77EyJahOr")
 
         # create a cursor
         cur = conn.cursor()
