@@ -117,6 +117,8 @@ def hello_world(request):
         Response object using
         `make_response <http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response>`.
     """
+    print(request)
+    print(request.args["query"])
     result = parsesend(request.args["query"])
     print(result)
     return {"message": str(result)}, 200
