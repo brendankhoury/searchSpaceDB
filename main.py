@@ -119,7 +119,7 @@ def hello_world(request):
     """
     result = parsesend(request.args["query"])
     print(result)
-    return make_response(result)
+    return {"message": str(result)}, 200
     # request_json = request.get_json()
     # if request.args and 'message' in request.args:
     #     return request.args.get('message')
