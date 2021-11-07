@@ -127,6 +127,17 @@ def hello_world(request):
     headers = {
         'Access-Control-Allow-Origin': '*'
     }
+    if request.method == 'OPTIONS':
+        # Allows GET requests from any origin with the Content-Type
+        # header and caches preflight response for an 3600s
+        headers = {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Max-Age': '3600'
+        }
+
+        return ({"message": str(result)}, 204, headers)
     return {"message": str(result)}, 200, headers
     # request_json = request.get_json()
     # if request.args and 'message' in request.args:
