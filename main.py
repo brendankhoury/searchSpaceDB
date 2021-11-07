@@ -1,7 +1,5 @@
 import psycopg2
 from collections import Counter
-from flask_cors import CORS
-CORS(app)
 
 # import nltk
 # nltk.data.path.append("nltk")
@@ -138,7 +136,7 @@ def hello_world(request):
         }
 
         return ({"message": str(result)}, 204, headers)
-    return {"message": str(result)}, 200, headers
+    return ({"message": str(result)}, 200, headers)
     # request_json = request.get_json()
     # if request.args and 'message' in request.args:
     #     return request.args.get('message')
