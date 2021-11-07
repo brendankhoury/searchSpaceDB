@@ -84,7 +84,7 @@ WITH length AS (
 update queryvec q
 set weight=(select (weight/length.len)) from length;
 
-select docid from queryscores where score is not null order by score desc;""")
+select docid from queryscores where score is not null order by score desc limit 10;""")
         #conn.commit()
         results = cur.fetchall()
 
