@@ -1,16 +1,16 @@
 import psycopg2
 from collections import Counter
 
-import nltk
-nltk.data.path.append("nltk")
+# import nltk
+# nltk.data.path.append("nltk")
 # nltk.download('averaged_perceptron_tagger')
 # nltk.download('stopwords')
 # nltk.download('wordnet')
 
 from string import ascii_letters
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-from nltk.tag import pos_tag
+# from nltk.corpus import stopwords
+# from nltk.stem import WordNetLemmatizer
+# from nltk.tag import pos_tag
 
 from flask import make_response
 
@@ -41,33 +41,18 @@ def processdoc(data):
     res = ""
     words = []
     for candidate in data.split():
-        if all(c in ascii_letters+'-\'' for c in candidate):
+        if all(c in ascii_letters+'-' for c in candidate):
             if len(candidate)==1:
                 if candidate[0] in ascii_letters:
                     words.append(candidate)
             else:
                 words.append(candidate)
     # print(words)
-    words = pos_tag(words)
     # print(words)
     failcount = 0
     wordcount = 0
-    stop_words = set(stopwords.words('english'))
-    lemmatizer = WordNetLemmatizer()
-    for t in words:
-        word = t[0].lower()
-        if word not in stop_words:
-            wordcount+=1
-            wtag = tag_trans(t[1])
-            # print(wtag)
-            if wtag == "e":
-                failcount+=1
-                res += (" " + word)
-            else:
-                # print(f'trying to lemmatize {word} got {lemmatizer.lemmatize(word, wtag)}')
-                res += (" " + lemmatizer.lemmatize(word, wtag))
-        else:
-            pass
+    for word in words:
+        res += (" " + word)
     return res
 
 def parsesend(data):
@@ -132,7 +117,9 @@ def hello_world(request):
         Response object using
         `make_response <http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response>`.
     """
-    return make_response(parsesend(request.args["query"]))
+    result = parsesend(request.args["query"])
+    print(result)
+    return make_response(result)
     # request_json = request.get_json()
     # if request.args and 'message' in request.args:
     #     return request.args.get('message')
