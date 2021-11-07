@@ -1,5 +1,7 @@
 import psycopg2
 from collections import Counter
+from flask_cors import CORS
+CORS(app)
 
 # import nltk
 # nltk.data.path.append("nltk")
