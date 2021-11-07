@@ -123,7 +123,11 @@ def hello_world(request):
     print(request.args["query"])
     result = parsesend(request.args["query"])
     print(result)
-    return {"message": str(result)}, 200
+
+    headers = {
+        'Access-Control-Allow-Origin': '*'
+    }
+    return {"message": str(result)}, 200, headers
     # request_json = request.get_json()
     # if request.args and 'message' in request.args:
     #     return request.args.get('message')
